@@ -121,19 +121,23 @@ private:
     }
     std::vector<BenchmarkResult> results;
 
-    BenchmarkResult compute_statistics(const std::string& name, const std::vector<double>& times) {
+    BenchmarkResult compute_statistics(const std::string& name,
+                                       const std::vector<double>& times) {
         BenchmarkResult result;
         result.name = name;
         result.times_ms = times;
 
         result.min_ms = *std::min_element(times.begin(), times.end());
         result.max_ms = *std::max_element(times.begin(), times.end());
-        result.mean_ms = std::accumulate(times.begin(), times.end(), 0.0) / times.size();
+        result.mean_ms = std::accumulate(times.begin(), times.end(), 0.0) /
+                         times.size();
 
         std::vector<double> sorted_times = times;
         std::sort(sorted_times.begin(), sorted_times.end());
         if (sorted_times.size() % 2 == 0) {
-            result.median_ms = (sorted_times[sorted_times.size() / 2 - 1] + sorted_times[sorted_times.size() / 2]) / 2.0;
+            result.median_ms = (sorted_times[sorted_times.size() / 2 - 1] +
+                                sorted_times[sorted_times.size() / 2]) /
+                               2.0;
         } else {
             result.median_ms = sorted_times[sorted_times.size() / 2];
         }
@@ -150,11 +154,16 @@ private:
 
     void print_result(const BenchmarkResult& result) {
         std::cout << std::left << std::setw(40) << result.name << "\n";
-        std::cout << "  Min:    " << std::fixed << std::setprecision(6) << result.min_ms << " ms\n";
-        std::cout << "  Max:    " << std::fixed << std::setprecision(6) << result.max_ms << " ms\n";
-        std::cout << "  Mean:   " << std::fixed << std::setprecision(6) << result.mean_ms << " ms\n";
-        std::cout << "  Median: " << std::fixed << std::setprecision(6) << result.median_ms << " ms\n";
-        std::cout << "  StdDev: " << std::fixed << std::setprecision(6) << result.stddev_ms << " ms\n";
+        std::cout << "  Min:    " << std::fixed << std::setprecision(6)
+                  << result.min_ms << " ms\n";
+        std::cout << "  Max:    " << std::fixed << std::setprecision(6)
+                  << result.max_ms << " ms\n";
+        std::cout << "  Mean:   " << std::fixed << std::setprecision(6)
+                  << result.mean_ms << " ms\n";
+        std::cout << "  Median: " << std::fixed << std::setprecision(6)
+                  << result.median_ms << " ms\n";
+        std::cout << "  StdDev: " << std::fixed << std::setprecision(6)
+                  << result.stddev_ms << " ms\n";
         std::cout << "  Iter:   " << result.times_ms.size() << "\n\n";
     }
 };
