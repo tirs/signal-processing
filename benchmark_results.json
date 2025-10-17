@@ -1,0 +1,77 @@
+{
+  "timestamp": "2025-10-17 11:39:00",
+  "benchmarks": [
+    {
+      "name": "FIR Filter (10k samples, 64-tap)",
+      "min_ms": 1.110400,
+      "max_ms": 1.774100,
+      "mean_ms": 1.187829,
+      "median_ms": 1.169250,
+      "stddev_ms": 0.094720,
+      "iterations": 100
+    },
+    {
+      "name": "Doppler Compensation (10k samples)",
+      "min_ms": 0.039100,
+      "max_ms": 0.093200,
+      "mean_ms": 0.045656,
+      "median_ms": 0.043500,
+      "stddev_ms": 0.008428,
+      "iterations": 100
+    },
+    {
+      "name": "QPSK Demodulation (1k symbols)",
+      "min_ms": 0.040300,
+      "max_ms": 0.345500,
+      "mean_ms": 0.051405,
+      "median_ms": 0.047000,
+      "stddev_ms": 0.030463,
+      "iterations": 100
+    },
+    {
+      "name": "Signal Analysis (10k samples)",
+      "min_ms": 0.399300,
+      "max_ms": 0.997200,
+      "mean_ms": 0.454927,
+      "median_ms": 0.443600,
+      "stddev_ms": 0.066174,
+      "iterations": 100
+    },
+    {
+      "name": "Frequency Search (500 symbols, +-5kHz)",
+      "min_ms": 0.000000,
+      "max_ms": 0.000100,
+      "mean_ms": 0.000040,
+      "median_ms": 0.000000,
+      "stddev_ms": 0.000049,
+      "iterations": 10
+    },
+    {
+      "name": "Ephemeris Position Calculation",
+      "min_ms": 0.000000,
+      "max_ms": 0.000100,
+      "mean_ms": 0.000009,
+      "median_ms": 0.000000,
+      "stddev_ms": 0.000029,
+      "iterations": 100
+    },
+    {
+      "name": "Topocentric Conversion (AZ/EL/Range)",
+      "min_ms": 0.000000,
+      "max_ms": 0.000100,
+      "mean_ms": 0.000011,
+      "median_ms": 0.000000,
+      "stddev_ms": 0.000031,
+      "iterations": 1000
+    },
+    {
+      "name": "Doppler Shift Calculation",
+      "min_ms": 0.000000,
+      "max_ms": 0.000100,
+      "mean_ms": 0.000012,
+      "median_ms": 0.000000,
+      "stddev_ms": 0.000032,
+      "iterations": 10000
+    }
+  ]
+}

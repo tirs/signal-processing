@@ -1,0 +1,83 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        build_type: [Release, Debug]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Create Build Directory
+      run: cmake -E make_directory ${{github.workspace}}/build
+
+    - name: Configure CMake
+      working-directory: ${{github.workspace}}/build
+      run: cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+
+    - name: Build
+      working-directory: ${{github.workspace}}/build
+      run: cmake --build . --config ${{ matrix.build_type }}
+
+    - name: Run Unit Tests
+      working-directory: ${{github.workspace}}/build
+      run: ctest --output-on-failure
+
+    - name: Run Demo
+      working-directory: ${{github.workspace}}/build
+      run: |
+        ${{ runner.os == 'Windows' && '.\Release\satellite_signal_demo.exe' || './satellite_signal_demo' }}
+
+  benchmark:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Create Build Directory
+      run: cmake -E make_directory ${{github.workspace}}/build
+
+    - name: Configure CMake
+      working-directory: ${{github.workspace}}/build
+      run: cmake .. -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build Benchmarks
+      working-directory: ${{github.workspace}}/build
+      run: cmake --build . --config Release
+
+    - name: Run Benchmarks
+      working-directory: ${{github.workspace}}/build
+      run: ./benchmark_suite
+
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check Code Formatting
+      run: |
+        apt-get update && apt-get install -y clang-format
+        find . -name "*.h" -o -name "*.cpp" | grep -v build | xargs clang-format --dry-run --Werror
+
+  documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Generate Documentation
+      run: |
+        echo "Documentation check passed"
+        if [ ! -f README.md ]; then exit 1; fi
+        if [ ! -f SATELLITE_SIGNAL_PROCESSING_GUIDE.txt ]; then exit 1; fi

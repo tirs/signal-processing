@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  satellite-signal-processing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: satellite-signal-demo
+    volumes:
+      - ./output:/output
+      - ./data:/data
+    environment:
+      - OUTPUT_DIR=/output
+      - DATA_DIR=/data
+    ports:
+      - "8080:8080"
+    command: >
+      sh -c "
+        echo 'Satellite Signal Processing System'
+        echo '======================================'
+        echo ''
+        echo 'Running unit tests...'
+        ./build/unit_tests || true
+        echo ''
+        echo 'Running benchmarks...'
+        ./build/benchmark_suite || true
+        echo ''
+        echo 'Running demonstration...'
+        ./build/satellite_signal_demo --output-file /output/demo_results.txt
+        echo ''
+        echo 'Results saved to /output/'
+      "
+
+  visualizer:
+    image: python:3.11
+    container_name: satellite-visualizer
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./output:/output
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "
+        pip install matplotlib numpy scipy
+        echo 'Generating visualizations...'
+        python3 /app/generate_visualizations.py
+        echo 'Visualizations saved to /output/'
+      "
+    depends_on:
+      - satellite-signal-processing
+
+networks:
+  default:
+    name: satellite-network

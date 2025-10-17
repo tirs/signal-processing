@@ -11,6 +11,8 @@
 #include "signal_processor.h"
 #include "satellite_ephemeris.h"
 #include "doppler_compensator.h"
+#include "cli_parser.h"
+#include "output_formatter.h"
 
 using namespace SatelliteSignal;
 
@@ -268,13 +270,24 @@ void demonstrate_frequency_search() {
 }
 
 // Main demonstration
-int main() {
+int main(int argc, char* argv[]) {
+    CLIParser::Options opts = CLIParser::parse(argc, argv);
+    
+    // Note: Benchmarks and tests are run via separate executables
+    // (benchmark_suite.exe and unit_tests.exe) to avoid linking issues
+    
     // Generate timestamped filename for results
     auto now = std::chrono::system_clock::now();
     auto time_t_now = std::chrono::system_clock::to_time_t(now);
     std::stringstream ss;
-    ss << "satellite_signal_results_" << std::put_time(std::localtime(&time_t_now), "%Y%m%d_%H%M%S") << ".txt";
-    std::string filename = ss.str();
+    
+    std::string filename;
+    if (!opts.output_file.empty()) {
+        filename = opts.output_file;
+    } else {
+        ss << "satellite_signal_results_" << std::put_time(std::localtime(&time_t_now), "%Y%m%d_%H%M%S") << ".txt";
+        filename = ss.str();
+    }
     
     // Open output file
     g_output_file.open(filename, std::ios::out);
@@ -288,6 +301,12 @@ int main() {
     header += "      SATELLITE SIGNAL PROCESSING SYSTEM DEMONSTRATION         \n";
     header += "    Demonstrating real-time signal processing for LEO/GEO      \n";
     header += "================================================================\n";
+    header += "\nConfiguration:\n";
+    header += "  Sample Rate: " + std::to_string(opts.sample_rate / 1e6) + " Msps\n";
+    header += "  SNR: " + std::to_string(opts.snr_db) + " dB\n";
+    header += "  Doppler: " + std::to_string(opts.doppler_hz) + " Hz\n";
+    header += "  Carrier Frequency: " + std::to_string(opts.carrier_freq_hz / 1e9) + " GHz\n\n";
+    
     write_output(header);
     
     try {
@@ -301,6 +320,9 @@ int main() {
         write_output(footer);
         
         std::cout << "\nResults saved to: " << filename << "\n";
+        if (opts.verbose) {
+            std::cout << "Output format: " << opts.output_format << "\n";
+        }
         
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
