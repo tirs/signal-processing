@@ -59,6 +59,16 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ./benchmark_suite
 
+    - name: Commit and Push Generated Files
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add benchmark_results.json DEMO_OUTPUT.txt 2>/dev/null || true
+        git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Update benchmark results and demo output" && git push)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   code-quality:
     runs-on: ubuntu-latest
 
