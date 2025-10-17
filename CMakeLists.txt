@@ -18,13 +18,13 @@ target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Compiler options
 if(MSVC)
-    target_compile_options(satellite_signal_demo PRIVATE /W4 /O2)
-    target_compile_options(benchmark_suite PRIVATE /W4 /O2)
-    target_compile_options(unit_tests PRIVATE /W4 /O2)
+    target_compile_options(satellite_signal_demo PRIVATE /W4)
+    target_compile_options(benchmark_suite PRIVATE /W4)
+    target_compile_options(unit_tests PRIVATE /W4)
 else()
-    target_compile_options(satellite_signal_demo PRIVATE -Wall -Wextra -O2)
-    target_compile_options(benchmark_suite PRIVATE -Wall -Wextra -O2)
-    target_compile_options(unit_tests PRIVATE -Wall -Wextra -O2)
+    target_compile_options(satellite_signal_demo PRIVATE -Wall -Wextra)
+    target_compile_options(benchmark_suite PRIVATE -Wall -Wextra)
+    target_compile_options(unit_tests PRIVATE -Wall -Wextra)
 endif()
 
 # Enable testing
