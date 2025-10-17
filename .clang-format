@@ -1,0 +1,117 @@
+---
+Language:        Cpp
+Standard:        c++17
+BasedOnStyle:    Google
+
+# Line and indentation settings
+ColumnLimit:              100
+IndentWidth:             4
+UseTab:                  Never
+IndentCaseLabels:        true
+IndentPPDirectives:      BeforeHash
+
+# Spacing
+SpaceAfterCStyleCast:     false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens:       ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles:          false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: true
+SpacesInParentheses:     false
+SpacesInSquareBrackets:  false
+
+# Alignment
+AlignAfterOpenBracket:   Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines:    Right
+AlignOperands:           AlignAfterOperator
+AlignTrailingComments:   true
+
+# Breaking and wrapping
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: false
+AlwaysBreakAfterReturnType: false
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: MultiLine
+
+# Braces and brackets
+BraceWrapping:
+  AfterCaseLabel:       false
+  AfterClass:           false
+  AfterControlStatement: Never
+  AfterEnum:            false
+  AfterFunction:        false
+  AfterNamespace:       false
+  AfterObjCDeclaration: false
+  AfterStruct:          false
+  AfterUnion:           false
+  AfterExternBlock:     false
+  BeforeCatch:          false
+  BeforeElse:           false
+  IndentBraces:         false
+  SplitEmptyFunctionBody: true
+  SplitEmptyRecord:     true
+  SplitEmptyNamespace:  true
+
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces:       Attach
+BreakBeforeConceptDeclarations: true
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeColon
+BreakInheritanceList:    BeforeColon
+BreakStringLiterals:     true
+
+# Function and constructor definitions
+CompactNamespaces:       false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+
+# Pointer and reference alignment
+DerivePointerAlignment:  false
+PointerAlignment:        Left
+ReferenceAlignment:      Pointer
+
+# Other
+FixNamespaceComments:    true
+IncludeBlocks:          Regroup
+IncludeCategories:
+  - Regex:             '^".*"'
+    Priority:          1
+  - Regex:             '^<.*>'
+    Priority:          2
+
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep:     2
+NamespaceIndentation:    All
+ObjCSpaceAfterProperty:  false
+ObjCSpaceBeforeProtocolList: true
+PackConstructorInitializers: Never
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyBreakComment:    300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString:     1000
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter:  1000000
+PenaltyReturnTypeOnItsOwnLine: 200
+ReflowComments:          true
+SortIncludes:            CaseSensitive
+SortUsingDeclarations:   true
+StatementMacros:
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
+  - BENCHMARK
+TabWidth:                4
+UseTab:                  Never
+...

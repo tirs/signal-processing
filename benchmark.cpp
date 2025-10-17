@@ -94,7 +94,9 @@ void benchmark_frequency_search() {
 
 void benchmark_ephemeris_calculation() {
     TLE tle;
-    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\0'};
+    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', '\0'};
     tle.catalog_number = 25544;
     tle.epoch_year = 24;
     tle.epoch_day = 1.0;
@@ -122,7 +124,9 @@ void benchmark_ephemeris_calculation() {
 
 void benchmark_topocentric_conversion() {
     TLE tle;
-    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\0'};
+    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', '\0'};
     tle.catalog_number = 25544;
     tle.epoch_year = 24;
     tle.epoch_day = 1.0;
@@ -149,7 +153,9 @@ void benchmark_topocentric_conversion() {
 
 void benchmark_doppler_shift_calculation() {
     TLE tle;
-    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\0'};
+    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', '\0'};
     tle.catalog_number = 25544;
     tle.epoch_year = 24;
     tle.epoch_day = 1.0;

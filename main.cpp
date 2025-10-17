@@ -73,8 +73,10 @@ void demonstrate_ephemeris_and_doppler() {
     
     // Create a sample TLE (ISS approximate elements)
     TLE tle;
-    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\0'};
-    tle.catalog_number = 25544;      // ISS catalog number
+    tle.satellite_name = {'I', 'S', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+                          ' ', '\0'};
+    tle.catalog_number = 25544; // ISS catalog number
     tle.epoch_year = 24;             // Epoch year (2024)
     tle.epoch_day = 1.0;             // Epoch day
     tle.ndot = 0.00003;              // First derivative of mean motion
@@ -190,7 +192,8 @@ void demonstrate_signal_processing() {
     auto bits = demod.demodulate(filtered_complex);
     std::stringstream demod_info;
     demod_info << "[OK] QPSK demodulation complete\n";
-    demod_info << "     Recovered Carrier Frequency: " << demod.get_carrier_frequency() << " Hz\n";
+    demod_info << "     Recovered Carrier Frequency: " << demod.get_carrier_frequency()
+               << " Hz\n";
     write_output(demod_info.str());
     
     // Analyze after processing
@@ -257,10 +260,13 @@ void demonstrate_frequency_search() {
         results << "| Estimated Doppler | " << std::fixed << std::setprecision(1)
                 << std::setw(9) << result.best_frequency << " Hz |\n";
         results << "| Correlation Metric| " << std::setw(9) << result.best_metric << "    |\n";
-        results << "| Frequency Error   | " << std::setw(9) 
+        results << "| Frequency Error   | " << std::setw(9)
                 << (result.best_frequency - TRUE_DOPPLER) << " Hz |\n";
-        double accuracy = 100.0 * (1.0 - std::fabs(result.best_frequency - TRUE_DOPPLER) / std::fabs(TRUE_DOPPLER));
-        results << "| Accuracy          | " << std::setw(9) << accuracy << " %  |\n";
+        double freq_error = result.best_frequency - TRUE_DOPPLER;
+        double accuracy =
+            100.0 * (1.0 - std::fabs(freq_error) / std::fabs(TRUE_DOPPLER));
+        results << "| Accuracy          | " << std::setw(9) << accuracy
+                << " %  |\n";
         results << "+-------------------+------------+\n";
     } else {
         results << "[FAIL] Frequency search did not converge\n";
