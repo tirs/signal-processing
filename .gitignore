@@ -1,0 +1,27 @@
+# Build directories
+build/
+CMakeFiles/
+CMakeCache.txt
+
+# Timestamped output files (keep latest manually)
+satellite_signal_results_*.txt
+
+# IDE/Editor files
+.vscode/
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.user
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Compiled binaries
+*.exe
+*.dll
+*.o
+*.obj
+*.lib
+*.a
